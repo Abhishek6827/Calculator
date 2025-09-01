@@ -11,7 +11,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://Abhishek6827.github.io/repo-name/",
+  "homepage": "https://abhishek6827.github.io/repo-name/",
   "dependencies": {
     "bootstrap": "^5.3.3",
     "react": "^18.3.1",
