@@ -1,9 +1,103 @@
-.calculator {
-    border: 1px solid rgba(90, 90, 90);
-    width: 200px;
-    border-radius: 5px;
+/* App.css */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  padding: 20px;
 }
 
+.calculator {
+  width: 300px;
+  background-color: #2d3748;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
 
+.display-container {
+  background-color: #4a5568;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: right;
+}
 
+.previous-value {
+  color: #cbd5e0;
+  font-size: 14px;
+  min-height: 20px;
+  margin-bottom: 5px;
+}
 
+.display {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 28px;
+  text-align: right;
+  outline: none;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.calc-button {
+  flex: 1;
+  height: 60px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #4a5568;
+  color: white;
+}
+
+.calc-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.calc-button:active {
+  transform: translateY(0);
+}
+
+.calc-button.operator {
+  background-color: #f6ad55;
+  color: #2d3748;
+}
+
+.calc-button.equals {
+  background-color: #38a169;
+  color: white;
+}
+
+.calc-button:nth-child(4n) {
+  margin-right: 0;
+}
+
+/* Responsive design */
+@media (max-width: 400px) {
+  .calculator {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .calc-button {
+    height: 50px;
+    font-size: 18px;
+  }
+}
