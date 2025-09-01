@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.module.css";
 
 function App() {
   const [calVal, setCalVal] = useState("");
@@ -29,7 +28,7 @@ function App() {
             result = prev * current;
             break;
           case "/":
-            result = prev / current;
+            result = current !== 0 ? prev / current : "Error";
             break;
           default:
             return;
@@ -57,13 +56,13 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <div className="calculator">
-        <div className="display-container">
-          <div className="previous-value">
+    <div style={styles.appContainer}>
+      <div style={styles.calculator}>
+        <div style={styles.displayContainer}>
+          <div style={styles.previousValue}>
             {previousValue} {operation}
           </div>
-          <input className="display" type="text" value={calVal} readOnly />
+          <input style={styles.display} type="text" value={calVal} readOnly />
         </div>
         <ButtonsContainer onClickbutton={onButtonClick} />
       </div>
@@ -81,15 +80,19 @@ const ButtonsContainer = ({ onClickbutton }) => {
   ];
 
   return (
-    <div className="buttons-container">
+    <div style={styles.buttonsContainer}>
       {buttonGroups.map((row, rowIndex) => (
-        <div key={rowIndex} className="button-row">
+        <div key={rowIndex} style={styles.buttonRow}>
           {row.map((button) => (
             <button
               key={button}
-              className={`calc-button ${button === "=" ? "equals" : ""} ${
-                isNaN(button) && button !== "." ? "operator" : ""
-              }`}
+              style={{
+                ...styles.calcButton,
+                ...(button === "=" ? styles.equalsButton : {}),
+                ...(isNaN(button) && button !== "."
+                  ? styles.operatorButton
+                  : {}),
+              }}
               onClick={() => onClickbutton(button)}
             >
               {button}
@@ -99,6 +102,78 @@ const ButtonsContainer = ({ onClickbutton }) => {
       ))}
     </div>
   );
+};
+
+// Inline styles instead of CSS modules
+const styles = {
+  appContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "100vh",
+    background: "linear-gradient(135deg, #6e8efb, #a777e3)",
+    padding: "20px",
+    fontFamily: "'Arial', sans-serif",
+  },
+  calculator: {
+    width: "300px",
+    backgroundColor: "#2d3748",
+    borderRadius: "20px",
+    padding: "20px",
+    boxShadow: "0 10px 25px rgba(0, 0, 0, 0.3)",
+  },
+  displayContainer: {
+    backgroundColor: "#4a5568",
+    borderRadius: "10px",
+    padding: "15px",
+    marginBottom: "20px",
+    textAlign: "right",
+  },
+  previousValue: {
+    color: "#cbd5e0",
+    fontSize: "14px",
+    minHeight: "20px",
+    marginBottom: "5px",
+  },
+  display: {
+    width: "100%",
+    background: "transparent",
+    border: "none",
+    color: "white",
+    fontSize: "28px",
+    textAlign: "right",
+    outline: "none",
+  },
+  buttonsContainer: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+  },
+  buttonRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    gap: "10px",
+  },
+  calcButton: {
+    flex: 1,
+    height: "60px",
+    border: "none",
+    borderRadius: "10px",
+    fontSize: "20px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    backgroundColor: "#4a5568",
+    color: "white",
+  },
+  operatorButton: {
+    backgroundColor: "#f6ad55",
+    color: "#2d3748",
+  },
+  equalsButton: {
+    backgroundColor: "#38a169",
+    color: "white",
+  },
 };
 
 export default App;
